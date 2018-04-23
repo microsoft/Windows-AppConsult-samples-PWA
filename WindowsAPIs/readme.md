@@ -1,5 +1,6 @@
-# PWA-Samples
-Sample Code for Windows Progressive Web Apps
+# Calling Windows APIs from Progressive Web Apps
+
+This project demonstrates how to display native toast notifications and update the application's tile from a Progressive Web App.
 
 ## Prerequisites
 
