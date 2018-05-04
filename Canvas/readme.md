@@ -6,6 +6,6 @@ This sample code demonstrates the inking extensions to the ```<canvas>``` contro
 
 With this control you can provide an enhanced experince to your users when ink input is needed.
 
-Note that this control only works in a Progressive Web App on Windows. Likely you’ll need conditional code to swap between the canvas control and an alternative control. See the code for how to detect this.
+Note that this control only works in a Progressive Web App on Windows. Likely you’ll need conditional code to enable the bespoke UI for the extended inking capabilities. See the code for how to detect this.
 
 Note that this requires the Spring 2018 release of Windows 10 (1803) or greater to run.
