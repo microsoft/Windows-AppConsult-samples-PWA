@@ -2,7 +2,7 @@
 
 Requires: Microsoft EdgeHTML 17.17134
 
-This sample code demonstrates extension to the ```<canvas>``` control in Microsoft Edge. This supports all the methods and properties of the InkCanvas class documented here: https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.inkcanvas. 
+This sample code demonstrates the inking extensions to the ```<canvas>``` control in Microsoft Edge. This supports all the methods and properties of the InkCanvas class documented here: https://docs.microsoft.com/en-us/uwp/api/windows.ui.xaml.controls.inkcanvas. 
 
 With this control you can provide an enhanced experince to your users when ink input is needed.
 
