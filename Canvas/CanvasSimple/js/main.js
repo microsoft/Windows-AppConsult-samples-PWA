@@ -4,10 +4,7 @@ var canvasContext;
 try {
     var Inking = Windows.UI.Input.Inking;
     var drawingAttributes = new Inking.InkDrawingAttributes();
-    var InkInputProcessingMode = Inking.InkInputProcessingMode;
-
-    
-
+    Inking.InkInputProcessingMode = InkInputProcessingMode.Inking;
 }
 catch (e) { }
 
@@ -43,7 +40,6 @@ function setThickness(value) {
 
 function initializeInkOnMsInkCanvas() {
     if (!runningWindows10withInkCanvasSupport()) {
-        document.getElementById("msInkCanvas").style.visibility = "hidden";
         return;
     }
 
@@ -62,16 +58,24 @@ function initializeInkOnMsInkCanvas() {
     var orangeButton = document.getElementById("orange");
     orangeButton.addEventListener("click", setOrange, false);
 
-    if (!runningWindows10withInkCanvasSupport()) return;
-        // Set initial ink stroke attributes.
-        drawingAttributes.color = Windows.UI.Colors.black;
-        drawingAttributes.ignorePressure = false;
-        drawingAttributes.fitToCurve = true;
-        canvasContext.msInkPresenter.updateDefaultDrawingAttributes(drawingAttributes);
-        canvasContext.msInkPresenter.inputDeviceTypes =
-            Windows.UI.Core.CoreInputDeviceTypes.mouse |
-            Windows.UI.Core.CoreInputDeviceTypes.pen |
-            Windows.UI.Core.CoreInputDeviceTypes.touch;
+    var thinButton = document.getElementById("thin");
+    thinButton.addEventListener("click", function () { setThickness(1) }, false);
+
+    var medButton = document.getElementById("medium");
+    medButton.addEventListener("click", function () { setThickness(3) }, false);
+
+    var thickButton = document.getElementById("thick");
+    thickButton.addEventListener("click", function () { setThickness(5) }, false);
+
+    // Set initial ink stroke attributes.
+    drawingAttributes.color = Windows.UI.Colors.black;
+    drawingAttributes.ignorePressure = false;
+    drawingAttributes.fitToCurve = true;
+    canvasContext.msInkPresenter.updateDefaultDrawingAttributes(drawingAttributes);
+    canvasContext.msInkPresenter.inputDeviceTypes =
+        Windows.UI.Core.CoreInputDeviceTypes.mouse |
+        Windows.UI.Core.CoreInputDeviceTypes.pen |
+        Windows.UI.Core.CoreInputDeviceTypes.touch;
 }
 
 function log(l) {
@@ -88,8 +92,11 @@ function runningWindows10withInkCanvasSupport() {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    initializeInkOnMsInkCanvas();
+    if (runningWindows10withInkCanvasSupport()) {
+        document.getElementById("inkCanvasUi").style.visibility = "visible";
+    }
 
+    initializeInkOnMsInkCanvas();
     // Temporary bug in ms-ink requires us to force paint the canvas when the window becomes invisible
     document.addEventListener("visibilitychange", function () {
         if (document.visibilityState == "visible") {

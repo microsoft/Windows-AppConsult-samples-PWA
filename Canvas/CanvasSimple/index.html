@@ -5,15 +5,28 @@
     <title>Canvas</title>
     <link href="css/default.css" rel="stylesheet" />
     <style>
+        div {
+            margin-left: 20px;
+        }
     </style>
     <script src="js/main.js"></script>
 </head>
 <body>
-    <div>Ink Canvas goes here!</div>
-    <button id="red">Red</button>
-    <button id="green">Green</button>
-    <button id="orange">Orange</button>
-    <button id="blue">Blue</button>
-    <canvas id="msInkCanvas" height="505" width="505" style="border:solid red; float: left"></canvas>
+    <div id="inkCanvasUi" style="visibility:hidden;">
+        <button id="red">Red</button>
+        <button id="green">Green</button>
+        <button id="orange">Orange</button>
+        <button id="blue">Blue</button>
+        <br />
+        <button id="thin">Thin</button>
+        <button id="medium">Medium</button>
+        <button id="thick">Thick</button>
+    </div>
+    <br />
+    <div>
+    <canvas id="msInkCanvas" height="500" width="800" style="border:1px solid #000000">
+    Your browser does not support the canvas control 
+    </canvas>
+    </div>
 </body>
 </html>
