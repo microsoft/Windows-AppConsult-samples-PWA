@@ -3,30 +3,31 @@
 <head>
     <meta charset="utf-8" />
     <title>Canvas</title>
-    <link href="css/default.css" rel="stylesheet" />
-    <style>
-        div {
-            margin-left: 20px;
-        }
-    </style>
+    <link href="lib/winjs-4.0.1/css/ui-light.css" rel="stylesheet" />
+    <script src="lib/winjs-4.0.1/js/base.js"></script>
+    <script src="lib/winjs-4.0.1/js/ui.js"></script>
     <script src="js/main.js"></script>
+    <link href="css/default.css" rel="stylesheet" />
 </head>
 <body>
     <div id="inkCanvasUi" style="visibility:hidden;">
-        <button id="red">Red</button>
-        <button id="green">Green</button>
-        <button id="orange">Orange</button>
-        <button id="blue">Blue</button>
+        <button id="Black">Black</button>
+        <button id="Green">Green</button>
+        <button id="Red">Red</button>
+        <button id="Blue">Blue</button>
         <br />
-        <button id="thin">Thin</button>
-        <button id="medium">Medium</button>
-        <button id="thick">Thick</button>
+        <button id="Erase">Erase</button>
+        <button id="Pencil">Pencil</button>
+        <button id="Highlighter">Highlighter</button>
+        <br />
+        <button id="Load">Load</button>
+        <button id="Save">Save</button>
+        <button id="Clear">Clear</button>
+        <button id="Undo">Undo</button>
     </div>
     <br />
-    <div>
-    <canvas id="msInkCanvas" height="500" width="800" style="border:1px solid #000000">
-    Your browser does not support the canvas control 
-    </canvas>
+    <div id="canvasGroup" aria-label="Ink canvas" role="img">
+        <canvas id="InkCanvas" class="surface"></canvas>
     </div>
 </body>
 </html>

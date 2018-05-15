@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "CanvasSimple", "CanvasSimple\CanvasSimple.jsproj", "{41D906F5-30C4-4277-AE75-0507DC8A50C5}"
 EndProject
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "PWACanvas", "PWACanvas\PWACanvas.jsproj", "{60C527C3-52AE-4435-940E-E0196E359683}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,30 @@ Global
 		{41D906F5-30C4-4277-AE75-0507DC8A50C5}.Release|x86.ActiveCfg = Release|x86
 		{41D906F5-30C4-4277-AE75-0507DC8A50C5}.Release|x86.Build.0 = Release|x86
 		{41D906F5-30C4-4277-AE75-0507DC8A50C5}.Release|x86.Deploy.0 = Release|x86
+		{60C527C3-52AE-4435-940E-E0196E359683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60C527C3-52AE-4435-940E-E0196E359683}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60C527C3-52AE-4435-940E-E0196E359683}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{60C527C3-52AE-4435-940E-E0196E359683}.Debug|ARM.ActiveCfg = Debug|ARM
+		{60C527C3-52AE-4435-940E-E0196E359683}.Debug|ARM.Build.0 = Debug|ARM
+		{60C527C3-52AE-4435-940E-E0196E359683}.Debug|ARM.Deploy.0 = Debug|ARM
+		{60C527C3-52AE-4435-940E-E0196E359683}.Debug|x64.ActiveCfg = Debug|x64
+		{60C527C3-52AE-4435-940E-E0196E359683}.Debug|x64.Build.0 = Debug|x64
+		{60C527C3-52AE-4435-940E-E0196E359683}.Debug|x64.Deploy.0 = Debug|x64
+		{60C527C3-52AE-4435-940E-E0196E359683}.Debug|x86.ActiveCfg = Debug|x86
+		{60C527C3-52AE-4435-940E-E0196E359683}.Debug|x86.Build.0 = Debug|x86
+		{60C527C3-52AE-4435-940E-E0196E359683}.Debug|x86.Deploy.0 = Debug|x86
+		{60C527C3-52AE-4435-940E-E0196E359683}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60C527C3-52AE-4435-940E-E0196E359683}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60C527C3-52AE-4435-940E-E0196E359683}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{60C527C3-52AE-4435-940E-E0196E359683}.Release|ARM.ActiveCfg = Release|ARM
+		{60C527C3-52AE-4435-940E-E0196E359683}.Release|ARM.Build.0 = Release|ARM
+		{60C527C3-52AE-4435-940E-E0196E359683}.Release|ARM.Deploy.0 = Release|ARM
+		{60C527C3-52AE-4435-940E-E0196E359683}.Release|x64.ActiveCfg = Release|x64
+		{60C527C3-52AE-4435-940E-E0196E359683}.Release|x64.Build.0 = Release|x64
+		{60C527C3-52AE-4435-940E-E0196E359683}.Release|x64.Deploy.0 = Release|x64
+		{60C527C3-52AE-4435-940E-E0196E359683}.Release|x86.ActiveCfg = Release|x86
+		{60C527C3-52AE-4435-940E-E0196E359683}.Release|x86.Build.0 = Release|x86
+		{60C527C3-52AE-4435-940E-E0196E359683}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
