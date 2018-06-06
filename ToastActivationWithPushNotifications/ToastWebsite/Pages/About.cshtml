@@ -1,0 +1,48 @@
+﻿@page
+@model AboutModel
+@{
+    ViewData["Title"] = "About";
+}
+
+<script type="text/javascript">
+    if (typeof Windows !== 'undefined' &&
+        typeof Windows.UI !== 'undefined' &&
+        typeof Windows.UI.Notifications !== 'undefined') {
+
+        //Windows.UI.WebUI.WebUIApplication.addEventListener('activated', function (args) {
+        //    if (args.kind === Windows.ApplicationModel.Activation.ActivationKind.toastNotification) {
+        //        console.log('app activated');
+        //        var result = args.argument;
+        //        window.location.href = 'https://toastwebsite.azurewebsites.net/' + result;
+        //    }
+        //});
+
+        function showToast(section) {
+            // TODO: The app just became visible. This may be a good time to refresh the view.
+
+            var notifications = Windows.UI.Notifications;
+
+            // Get the toast notification manager for the current app.
+            var notificationManager = notifications.ToastNotificationManager;
+
+            // The getTemplateContent method returns a Windows.Data.Xml.Dom.XmlDocument object
+            // that contains the toast notification XML content.
+            var xml = '<toast launch="' + section + '"><visual><binding template="ToastGeneric"><text>Progressive Web Apps</text><text>Click here to open the ' + section + ' Page</text></binding></visual></toast>';
+            var toastXml = new Windows.Data.Xml.Dom.XmlDocument();
+            toastXml.loadXml(xml);
+
+            // Create a toast notification from the XML, then create a ToastNotifier object
+            // to send the toast.
+            var toast = new notifications.ToastNotification(toastXml);
+
+            notificationManager.createToastNotifier().show(toast);
+        }
+
+    }
+</script>
+
+<h2>@ViewData["Title"]</h2>
+<h3>@Model.Message</h3>
+
+<p>Use this area to provide additional information.</p>
+<p><button onclick="showToast('Contact');">Show toast for Contact page</button></p>
