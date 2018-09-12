@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    image: qmatteoq/testwebapp
+    ports:
+      - "8080:80"
+    container_name: webapp
+  newsfeed:
+    image: qmatteoq/webapitest
+    container_name: newsfeed
+  redis:
+    image: redis
+    container_name: rediscache
