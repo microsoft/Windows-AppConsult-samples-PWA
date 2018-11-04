@@ -1,0 +1,18 @@
+<html>
+    <title>This is your web site</title>
+    <body>This web site, when run as a Windows PWA will recieve Dev Center Push Notificaions.  <p></p>See:
+        <a href="https://docs.microsoft.com/en-us/windows/uwp/monetize/configure-your-app-to-receive-dev-center-notifications>">Configure your app for targeted push notifications </a>
+    for more information.
+    </p>
+<script type="text/javascript">
+if (typeof Windows !== 'undefined' &&
+  typeof Windows.UI !== 'undefined' &&
+  typeof Windows.UI.Notifications !== 'undefined') {
+  PushWinRTComponent.PushNotifications.init().then(
+    function (result) {
+      console.log("push init result: " + result);
+    });
+}
+</script>
+</body>
+</html>

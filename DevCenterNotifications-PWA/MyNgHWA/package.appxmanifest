@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
+  <Identity Name="57012MikeFrancis.TrialTest123" Version="1.77.11.0" Publisher="CN=76F03FF0-6FBC-4475-8F1A-617EA5713D5C" />
+  <mp:PhoneIdentity PhoneProductId="d7e8e46c-4584-4e5b-8439-fd01b1f5201b" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Properties>
+    <DisplayName>Trial Test 123</DisplayName>
+    <PublisherDisplayName>Mike Francis</PublisherDisplayName>
+    <Logo>images\storelogo.png</Logo>
+  </Properties>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17134.0" MaxVersionTested="10.0.17134.0" />
+  </Dependencies>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" StartPage="http://localhost:5000">
+      <uap:ApplicationContentUriRules>
+        <uap:Rule Match="http://localhost:5000" Type="include" WindowsRuntimeAccess="all" />
+      </uap:ApplicationContentUriRules>
+      <uap:VisualElements DisplayName="Trial Test 123" Description="MyNgHWA" BackgroundColor="transparent" Square150x150Logo="images\Square150x150Logo.png" Square44x44Logo="images\Square44x44Logo.png">
+        <uap:DefaultTile Wide310x150Logo="images\Wide310x150Logo.png" Square310x310Logo="images\LargeTile.png" Square71x71Logo="images\SmallTile.png" ShortName="Test App">
+          <uap:TileUpdate Recurrence="halfHour" UriTemplate="http://localhost:7071/api/UpdateTile?caption=this%20is%20a%20caption&amp;subcaption=sdf asf asd fas df asd fa sf asd fasd f sdf sdf as fsthis is a subcaption&amp;image=http://pngimg.com/uploads/sun/sun_PNG13427.png" />
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+            <uap:ShowOn Tile="wide310x150Logo" />
+            <uap:ShowOn Tile="square310x310Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+        <uap:SplashScreen Image="images\splashscreen.png" />
+      </uap:VisualElements>
+      <Extensions>
+        <Extension Category="windows.backgroundTasks" StartPage="js/toastBgService.js">
+          <BackgroundTasks>
+            <Task Type="systemEvent" />
+            <Task Type="timer" />
+          </BackgroundTasks>
+        </Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>

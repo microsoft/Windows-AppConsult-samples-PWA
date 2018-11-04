@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <title>Add Push Notifications to your app the easy way with Partner Center + Microsoft Store Services SDK</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css" integrity="sha384-D+9gmBxUQogRLqvARvNLmA9hS2x//eK1FhVb9PiU86gmcrBrJAQT8okdJ4LMp2uv" crossorigin="anonymous">
+        <style>
+/*--------------------------------------------------------------------------------------------- * Copyright (c) Microsoft Corporation. All rights reserved. * Licensed under the MIT License. See License.txt in the project root for license information. *--------------------------------------------------------------------------------------------*/ body { font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback"; font-size: 14px; padding: 0 26px; line-height: 22px; word-wrap: break-word; } #code-csp-warning { position: fixed; top: 0; right: 0; color: white; margin: 16px; text-align: center; font-size: 12px; font-family: sans-serif; background-color:#444444; cursor: pointer; padding: 6px; box-shadow: 1px 1px 1px rgba(0,0,0,.25); } #code-csp-warning:hover { text-decoration: none; background-color:#007acc; box-shadow: 2px 2px 2px rgba(0,0,0,.25); } body.scrollBeyondLastLine { margin-bottom: calc(100vh - 22px); } body.showEditorSelection .code-line { position: relative; } body.showEditorSelection .code-active-line:before, body.showEditorSelection .code-line:hover:before { content: ""; display: block; position: absolute; top: 0; left: -12px; height: 100%; } body.showEditorSelection li.code-active-line:before, body.showEditorSelection li.code-line:hover:before { left: -30px; } .vscode-light.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); } .vscode-light.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); } .vscode-light.showEditorSelection .code-line .code-line:hover:before { border-left: none; } .vscode-dark.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); } .vscode-dark.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); } .vscode-dark.showEditorSelection .code-line .code-line:hover:before { border-left: none; } .vscode-high-contrast.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(255, 160, 0, 0.7); } .vscode-high-contrast.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(255, 160, 0, 1); } .vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before { border-left: none; } img { max-width: 100%; max-height: 100%; } a { text-decoration: none; } a:hover { text-decoration: underline; } a:focus, input:focus, select:focus, textarea:focus { outline: 1px solid -webkit-focus-ring-color; outline-offset: -1px; } hr { border: 0; height: 2px; border-bottom: 2px solid; } h1 { padding-bottom: 0.3em; line-height: 1.2; border-bottom-width: 1px; border-bottom-style: solid; } h1, h2, h3 { font-weight: normal; } h1 code, h2 code, h3 code, h4 code, h5 code, h6 code { font-size: inherit; line-height: auto; } table { border-collapse: collapse; } table > thead > tr > th { text-align: left; border-bottom: 1px solid; } table > thead > tr > th, table > thead > tr > td, table > tbody > tr > th, table > tbody > tr > td { padding: 5px 10px; } table > tbody > tr + tr > td { border-top: 1px solid; } blockquote { margin: 0 7px 0 5px; padding: 0 16px 0 10px; border-left-width: 5px; border-left-style: solid; } code { font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback"; font-size: 14px; line-height: 19px; } body.wordWrap pre { white-space: pre-wrap; } .mac code { font-size: 12px; line-height: 18px; } pre:not(.hljs), pre.hljs code > div { padding: 16px; border-radius: 3px; overflow: auto; } /** Theming */ pre code { color: var(--vscode-editor-foreground); } .vscode-light pre:not(.hljs), .vscode-light code > div { background-color: rgba(220, 220, 220, 0.4); } .vscode-dark pre:not(.hljs), .vscode-dark code > div { background-color: rgba(10, 10, 10, 0.4); } .vscode-high-contrast pre:not(.hljs), .vscode-high-contrast code > div { background-color: rgb(0, 0, 0); } .vscode-high-contrast h1 { border-color: rgb(0, 0, 0); } .vscode-light table > thead > tr > th { border-color: rgba(0, 0, 0, 0.69); } .vscode-dark table > thead > tr > th { border-color: rgba(255, 255, 255, 0.69); } .vscode-light h1, .vscode-light hr, .vscode-light table > tbody > tr + tr > td { border-color: rgba(0, 0, 0, 0.18); } .vscode-dark h1, .vscode-dark hr, .vscode-dark table > tbody > tr + tr > td { border-color: rgba(255, 255, 255, 0.18); } 
+</style>
+<style>
+/* Tomorrow Theme */ /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */ /* Original theme - https://github.com/chriskempson/tomorrow-theme */ /* Tomorrow Comment */ .hljs-comment, .hljs-quote { color: #8e908c; } /* Tomorrow Red */ .hljs-variable, .hljs-template-variable, .hljs-tag, .hljs-name, .hljs-selector-id, .hljs-selector-class, .hljs-regexp, .hljs-deletion { color: #c82829; } /* Tomorrow Orange */ .hljs-number, .hljs-built_in, .hljs-builtin-name, .hljs-literal, .hljs-type, .hljs-params, .hljs-meta, .hljs-link { color: #f5871f; } /* Tomorrow Yellow */ .hljs-attribute { color: #eab700; } /* Tomorrow Green */ .hljs-string, .hljs-symbol, .hljs-bullet, .hljs-addition { color: #718c00; } /* Tomorrow Blue */ .hljs-title, .hljs-section { color: #4271ae; } /* Tomorrow Purple */ .hljs-keyword, .hljs-selector-tag { color: #8959a8; } .hljs { display: block; overflow-x: auto; color: #4d4d4c; padding: 0.5em; } .hljs-emphasis { font-style: italic; } .hljs-strong { font-weight: bold; }
+</style>
+<style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="add-push-notifications-to-your-app-the-easy-way-with-partner-center--microsoft-store-services-sdk">Add Push Notifications to your app the easy way with Partner Center + Microsoft Store Services SDK</h1>
+<img  style="margin:0px 15px 0px 0px;float:left" alt="halloween sale" src="file:///c%3A/p/DevCenterNotifications-PWA/images/jack1.jpg" height="50%" width="50%">
+<p>What if I told you that you could implement Windows toast and tile notifications with just two lines of code? Would you be interested?</p>
+<p>What if I told you that you didn't have to implement any server side code? Are you more interested?</p>
+<p>What if I told you that you could do this in your progressive web app, UWP or Win 32 app? Is your interest now off the charts?? If so, read on!</p>
+<p>With the combination of the <a href="https://docs.microsoft.com/en-us/windows/uwp/publish/send-push-notifications-to-your-apps-customers">Partner Center Engagement Feature</a> and the <a href="https://docs.microsoft.com/en-us/windows/uwp/mosnetize/microsoft-store-services-sdk">Microsoft Store Services SDK</a> you can easily add Push Notifications to your <a href="https://docs.microsoft.com/en-us/microsoft-edge/progressive-web-apps">Windows Progressive Web App</a> (PWA), <a href="https://docs.microsoft.com/en-us/windows/uwp/get-started/universal-application-platform-guide">UWP</a>, or <a href="https://aka.ms/desktopbridge">Desktop Bridge - Win32 app</a>.</p>
+<h2 id="a-name%22powerfulpush%22apowerful-push-with-windows-notification-servicesimg-src%22imagespower-button40png%22-height%2240px%22-width%2240px%22-align%22left%22"><a name="powerfulpush"></a>Powerful Push with Windows Notification Services<img src="file:///c%3A/p/DevCenterNotifications-PWA/images/power-button40.png" height="40px" width="40px" align="left"/></h2>
+<p>Push notifications in Windows are very powerful and flexible allowing you to target specific information to specific users. This, however, requires you integrate with the Windows Notifications Service (WNS), set up a server app to send notifications and add code to your client application that registers with WNS. While this gives the developer flexibility and one to one targeting, it may be more than what you need. For an excellent walkthrough of setting up WNS Push Notifications, see this post, <a href="https://blogs.msdn.microsoft.com/appconsult/2018/06/07/push-notifications-in-a-pwa-running-on-windows-10/">Push notifications in a PWA running on Windows 10</a> written by <a href="https://twitter.com/QmatteoQ">Matteo Pagani</a>.</p>
+<h2 id="easy-push-with-microsoft-store-services-notificationsimg-src%22imageseasybutton100png%22-height%2240px%22-width%2240px%22-align%22left%22">Easy Push with Microsoft Store Services Notifications<img src="file:///c%3A/p/DevCenterNotifications-PWA/images/easybutton100.png" height="40px" width="40px" align="left"/></h2>
+<p>In contrast to 'WNS', 'Easy Push' sends general toast and tile updates to user groups you specify. This can be:</p>
+<ul>
+<li>All of the users of all of your apps and games.</li>
+<li>All of the users of a specific app.</li>
+<li>All of the users of some of your apps.</li>
+<li>Subsets of the above, <a href="https://docs.microsoft.com/en-us/windows/uwp/publish/create-customer-groups">grouped by demographic criteria</a> you specify. <strong>The marketers in your organization will love this feature.</strong> For example, you may want to reward your big spending customers with a <a href="https://docs.microsoft.com/en-us/windows/uwp/publish/generate-promotional-codes">promotional code</a> that can be used for a free license for a new app you are releasing. You may want to up-sell your low spending customers on in app purchases.</li>
+</ul>
+<p>Note that with Microsoft Store Services SDK notifications you don't send specific data to specific users. This is very useful for:</p>
+<ul>
+<li>Cross promoting your apps. For example, if you have launched a new app, ask users of your other apps to check it out.</li>
+<li>Letting your users know when your apps or IAP go on <a href="https://docs.microsoft.com/en-us/windows/uwp/publish/set-and-schedule-app-pricing">sale</a>.</li>
+<li>Requesting feedback.</li>
+<li>Sending ad hoc announcements and information to your users. For example, providing down time schedules, new feature announcements, and service alerts.</li>
+</ul>
+<p>Microsoft Store Services notifications also support <a href="https://docs.microsoft.com/en-us/windows/uwp/design/shell/tiles-and-notifications/adaptive-interactive-toasts">interactive toast messages</a> which allow users to interact with your app without having to launch it.</p>
+<p>Microsoft Store Services notifications can't send information customized for a specific user. For these types of notifications, see <a href="#powerfulpush">'Powerful Push'</a> above.</p>
+<h2 id="lets-see-the-codeimg-src%22imagessourcecodepng%22-height%2240px%22-width%2240px%22-align%22left%22-style%22margin0px-5px-0px-0px%22">Let's see the code!<img src="file:///c%3A/p/DevCenterNotifications-PWA/images/sourcecode.png" height="40px" width="40px" align="left" style="margin:0px 5px 0px 0px"/></h2>
+<p>To implement the <code>Microsoft Store Services notifications</code> you will:</p>
+<ol>
+<li>
+<p>Install the <a href="https://docs.microsoft.com/en-us/windows/uwp/mosnetize/microsoft-store-services-sdk">Microsoft Store Services SDK</a></p>
+</li>
+<li>
+<p>Add a Reference to the <code>Microsoft.Services.Store.SDK</code> in your project. See highlighted below:</p>
+</li>
+</ol>
+<p><img src="file:///c%3A/p/DevCenterNotifications-PWA/Images/reference1.png" alt="reference to SDK"></p>
+<ol start="3">
+<li><a name="registrationcode"></a>Add the following code to the Start up of your app:</li>
+</ol>
+<pre><code class="language-cs"><div><span class="hljs-comment">// Setup connection between app and Microsoft Partner Center Push Services</span>
+StoreServicesEngagementManager engagementManager = StoreServicesEngagementManager.GetDefault();
+<span class="hljs-keyword">var</span> res = <span class="hljs-keyword">await</span> engagementManager.RegisterNotificationChannelAsync();
+</div></code></pre>
+<ol start="4">
+<li>
+<p>Publish your app to Partner Center using the <a href="https://docs.microsoft.com/en-us/windows/uwp/publish/choose-visibility-options">'Limited Audience' or
+'Hidden' visibility options</a>. You need to do this because in order to setup the push notifications Partner Center will need to explicitly reference your app. In order to do this, your app must be published with a reference to the <code>Microsoft.Services.Store.SDK</code>. Note that the publishing process can take up to three business days.</p>
+</li>
+<li>
+<p>Once your app has published, you don't need to install it from the Store. You can continue to develop the app - just make sure the <a href="https://docs.microsoft.com/en-us/windows/uwp/publish/view-app-identity-details">identity</a> of the app matches what you have submitted to Partner Center.</p>
+</li>
+<li>
+<p>In the <code>Engagement</code> section of <code>Partner Center</code> define and send your Toast and Tile Push Notifications.</p>
+<p>6.1. In <code>Partner Center</code>, select <code>Engage</code> and you should see the <code>Notifications</code> page as shown below.</p>
+<p><img src="file:///c%3A/p/DevCenterNotifications-PWA/images/devcenternotificationspage.png" alt="Partner Center Engagement with Push Notifications"></p>
+<p>6.2. Click <code>New Notification</code></p>
+<p>6.3. Click <code>Blank Toast</code>, <code>OK</code></p>
+<p>6.4. From the drop down, select the app or apps to send notifications. See screenshot below:</p>
+<p><img src="file:///c%3A/p/DevCenterNotifications-PWA/Images/NoteDrop.png" alt="note drop"></p>
+<p>6.5 Here are some sample values for this toast notification:</p>
+<p><strong>Name:</strong> My First Engagement Push</p>
+<p><strong>Customer Groups:</strong> All Users</p>
+<p><strong>Send Notification Immediately:</strong> Check</p>
+<p><strong>Notification Never Expires:</strong> Check</p>
+<p><strong>Language:</strong> English (default)</p>
+<p><strong>Activation Type:</strong> Foreground</p>
+<p><strong>Duration:</strong> Short</p>
+<p><strong>Scenario:</strong> Default</p>
+<p><strong>Visual (text 1):</strong> Hello from My App!</p>
+<p>Click <code>Send</code></p>
+</li>
+</ol>
+<p>Your notification will be sent immediately it will take up to one minute to receive the notification. Note that the app's registration code <a href="#registrationcode">(Step 3)</a> should have been run at least once. Note that the app doesn't need to be running in order to receive the notification.</p>
+<p>Did it arrive? Yes. High-Five!
+No? Here are some things to check:</p>
+<ul>
+<li>Did the registration code run?</li>
+<li>Does the app's <a href="https://docs.microsoft.com/en-us/windows/uwp/publish/view-app-identity-details">identity</a> match it's definition in Partner Center?</li>
+<li>Are you sending the notification to the correct app?</li>
+</ul>
+<h2 id="how-about-a-sampleimg-src%22imagesgithubpng%22-height%2240px%22-width%2240px%22-align%22left%22-style%22margin0px-5px-0px-0px%22">How about a sample?<img src="file:///c%3A/p/DevCenterNotifications-PWA/images/github.png" height="40px" width="40px" align="left" style="margin:0px 5px 0px 0px"/></h2>
+<p>In the following steps, I'll describe the code found here: <a href="https://github.com/Microsoft/Windows-AppConsult-samples-PWA/tree/master/DevCenterNotifications-PWA">https://github.com/Microsoft/Windows-AppConsult-samples-PWA/tree/master/DevCenterNotifications-PWA</a></p>
+<p>This sample implements the registration code <a href="#registrationcode">(step 3)</a> in a Windows Runtime Component (<strong>PushWinRTComponent</strong>). For easy integration, free free to use it. This will automatically download the Microsoft Store Services SDK library at build time.</p>
+<p>PushWinRTComponent exposes the method <code>PushNotifications.init()</code> that will be called via JavaScript as follows:</p>
+<pre><code class="language-javascript"><div><span class="hljs-comment">// index.html</span>
+<span class="hljs-comment">// Set up Push notifications</span>
+<span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> Windows !== <span class="hljs-string">'undefined'</span> &amp;&amp;
+  <span class="hljs-keyword">typeof</span> Windows.UI !== <span class="hljs-string">'undefined'</span> &amp;&amp;
+  <span class="hljs-keyword">typeof</span> Windows.UI.Notifications !== <span class="hljs-string">'undefined'</span>) {
+  PushWinRTComponent.PushNotifications.init().then(
+    <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">result</span>) </span>{
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"push init result: "</span> + result);
+    });
+}
+</div></code></pre>
+<p>References:</p>
+<p><a href="https://docs.microsoft.com/en-us/windows/uwp/publish/send-push-notifications-to-your-apps-customers">Send notifications to your app's customers</a></p>
+<p><a href="https://blogs.msdn.microsoft.com/appconsult/2018/06/07/push-notifications-in-a-pwa-running-on-windows-10/">Push Notifications in a PWA Running on Windows 10</a></p>
+
+    </body>
+    </html>
