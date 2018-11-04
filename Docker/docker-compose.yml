@@ -6,7 +6,7 @@ services:
       - "8080:80"
     container_name: webapp
   newsfeed:
-    image: qmatteoq/webapitest
+    image: qmatteoq/testwebapi
     container_name: newsfeed
   redis:
     image: redis
