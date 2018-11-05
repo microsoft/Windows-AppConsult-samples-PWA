@@ -5,7 +5,7 @@ This demonstrates a Progressive Web App with the follow components:
 1. WRCBackgroundTasks (Windows Runtime Compoment)
 Contains the following background tasks:
 	
-   a. Pre-Install
+   a. Pre-Install (Applies to OEM scenarios only)
     
     b. Timer
     
