@@ -14,6 +14,7 @@ using System.Xml;
 using Microsoft.SyndicationFeed.Rss;
 using System.Linq;
 using System;
+using Alexa.NET.LocaleSpeech;
 
 namespace AlexaSkill
 {
@@ -27,6 +28,9 @@ namespace AlexaSkill
             string json = await req.ReadAsStringAsync();
             var skillRequest = JsonConvert.DeserializeObject<SkillRequest>(json);
 
+            //this is the language used to invoke the skill
+            string language = skillRequest.Request.Locale;
+
             bool isValid = await ValidateRequest(req, log, skillRequest);
             if (!isValid)
             {
@@ -34,15 +38,16 @@ namespace AlexaSkill
             }
 
             var requestType = skillRequest.GetRequestType();
+            var locale = SetupLanguages(skillRequest);
 
             SkillResponse response = null;
 
             if (requestType == typeof(LaunchRequest))
             {
-                response = ResponseBuilder.Tell("Welcome to AppConsult!");
+                var message = await locale.Get("Welcome", null);
+                response = ResponseBuilder.Tell(message);
                 response.Response.ShouldEndSession = false;
             }
-
             else if (requestType == typeof(IntentRequest))
             {
                 var intentRequest = skillRequest.Request as IntentRequest;
@@ -51,33 +56,27 @@ namespace AlexaSkill
                 {
                     string rss = "https://blogs.msdn.microsoft.com/appconsult/feed/";
                     string output = string.Empty;
-                    List<string> news = null;
-                    try
-                    {
-                        news = await ParseFeed(rss);
-                    }
-                    catch (Exception exc)
-                    {
-                        output = "An error has occured, please try again later";
-                    }
+                    List<string> news = await ParseFeed(rss);
 
-                    output = $"The title of the last article is {news.FirstOrDefault()}";
+                    var message = await locale.Get("LastPosts", new string[] { news.FirstOrDefault() });
 
-                    response = ResponseBuilder.Tell(output);
+                    response = ResponseBuilder.Tell(message);
                 }
                 else if (intentRequest.Intent.Name == "AMAZON.CancelIntent")
                 {
-                    response = ResponseBuilder.Tell("Cancelling.");
+                    var message = await locale.Get("Cancel", null);
+                    response = ResponseBuilder.Tell(message);
                 }
                 else if (intentRequest.Intent.Name == "AMAZON.HelpIntent")
                 {
-                    response = ResponseBuilder.Tell("You can ask which are the latest article or when the last article was published.");
-
+                    var message = await locale.Get("Help", null);
+                    response = ResponseBuilder.Tell(message);
                     response.Response.ShouldEndSession = false;
                 }
                 else if (intentRequest.Intent.Name == "AMAZON.StopIntent")
                 {
-                    response = ResponseBuilder.Tell("Bye");
+                    var message = await locale.Get("Stop", null);
+                    response = ResponseBuilder.Tell(message);
                 }
             }
             else if (requestType == typeof(SessionEndedRequest))
@@ -154,6 +153,34 @@ namespace AlexaSkill
                 log.LogError("Validation failed - RequestVerification failed");
             }
             return valid;
+        }
+
+        public static ILocaleSpeech SetupLanguages(SkillRequest skillRequest)
+        {
+            var store = new DictionaryLocaleSpeechStore();
+            store.AddLanguage("en", new Dictionary<string, object>
+            {
+                { "Welcome", "Welcome to the AppConsult skill!" },
+                { "LastPosts", "The title of the last article is {0}" },
+                { "Cancel", "I'm cancelling the request..." },
+                { "Help", "You can ask me, for example, which is the last article." },
+                { "Stop", "Goodbye!" }
+            });
+
+            store.AddLanguage("it", new Dictionary<string, object>
+            {
+                { "Welcome", "Benvenuti in Windows AppConsult!" },
+                { "LastPosts", "Il titolo dell'ultimo articolo è {0}" },
+                { "Cancel", "Sto annullando la richiesta..." },
+                { "Help", "Puoi chiedermi, ad esempio, qual è l'ultimo articolo. " },
+                { "Stop", "Alla prossima!" }
+            });
+
+
+            var localeSpeechFactory = new LocaleSpeechFactory(store);
+            var locale = localeSpeechFactory.Create(skillRequest);
+
+            return locale;
         }
     }
 }
