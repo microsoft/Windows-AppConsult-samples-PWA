@@ -148,11 +148,15 @@ namespace AlexaSkill
             bool isTimestampValid = RequestVerification.RequestTimestampWithinTolerance(skillRequest);
             bool valid = await RequestVerification.Verify(signature, certUrl, body);
 
-            if (!valid && !isTimestampValid)
+            if (!valid || !isTimestampValid)
             {
                 log.LogError("Validation failed - RequestVerification failed");
+                return false;
             }
-            return valid;
+            else
+            {
+                return true;
+            }
         }
 
         public static ILocaleSpeech SetupLanguages(SkillRequest skillRequest)
