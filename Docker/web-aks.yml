@@ -1,0 +1,88 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis
+        ports:
+        - containerPort: 6379
+          name: redis
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+spec:
+  ports:
+  - port: 6379
+  selector:
+    app: redis
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: newsfeed
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: newsfeed
+    spec:
+      containers:
+      - name: newsfeed
+        image: qmatteoq/testwebapi
+        ports:
+        - containerPort: 80
+          name: newsfeed
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: newsfeed
+spec:
+  ports:
+  - port: 80
+  selector:
+    app: newsfeed
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+      - name: web
+        image: qmatteoq/testwebapp
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: web

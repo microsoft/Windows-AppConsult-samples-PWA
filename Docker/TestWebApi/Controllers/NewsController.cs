@@ -19,7 +19,7 @@ namespace TestWebApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<string>>> Get()
         {
-            ConnectionMultiplexer connection = await ConnectionMultiplexer.ConnectAsync("rediscache");
+            ConnectionMultiplexer connection = await ConnectionMultiplexer.ConnectAsync("redis");
             var db = connection.GetDatabase();
 
             List<string> news = new List<string>();
@@ -28,7 +28,7 @@ namespace TestWebApi.Controllers
             if (string.IsNullOrEmpty(rss))
             {
                 HttpClient client = new HttpClient();
-                rss = await client.GetStringAsync("https://blogs.msdn.microsoft.com/appconsult/feed/");
+                rss = await client.GetStringAsync("https://techcommunity.microsoft.com/gxcuf89792/rss/board?board.id=WindowsDevAppConsult");
                 await db.StringSetAsync("feedRss", rss);
             }
             else
